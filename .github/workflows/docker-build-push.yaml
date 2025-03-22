@@ -7,8 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14, 16, 18]  # Running on multiple Node.js versions
-
+        node-version: [14, 16, 18] 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
