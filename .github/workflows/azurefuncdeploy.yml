@@ -1,10 +1,11 @@
-name: Azure Function Deploy With CICD.
+name: Azure Function Deploy With CICD
 on:
   workflow_dispatch:
 
 permissions:
-      id-token: write
-      contents: read
+  id-token: write
+  contents: read
+
 jobs: 
   deploy-functions:
     runs-on: ubuntu-latest
@@ -20,14 +21,19 @@ jobs:
 
       - name: Install required python modules
         run: |
-            cd ./AzureStorageQueueTriggerFunction
-            python -m pip install --upgrade pip
-            pip install --target="./.python_packages/lib/site-packages" -r requirements.txt 
+          cd ./AzureStorageQueueTriggerFunction
+          python -m pip install --upgrade pip
+          pip install --target="./.python_packages/lib/site-packages" -r requirements.txt 
 
       - name: Zip the Azure Function Deploy folder
         run: |
           cd AzureStorageQueueTriggerFunction
           zip -r ../AzureStorageQueueTriggerFunction.zip ./*
+
+      - name: Display zip file details
+        run: |
+          ls -la
+          pwd
 
       - name: 'Az CLI login'
         uses: azure/login@v1
