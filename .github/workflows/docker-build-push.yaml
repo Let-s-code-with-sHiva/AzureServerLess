@@ -19,14 +19,10 @@ jobs:
 
       - name: Generate Output
         id: output_step
-        run: echo "RESULT=Node.js ${{ matrix.node-version }} tested" >> $GITHUB_ENV
-
-      - name: Save Output
-        id: save_output
-        run: echo "::set-output name=test_result::Node.js ${{ matrix.node-version }} tested"
+        run: echo "test_result=Node.js ${{ matrix.node-version }} tested" >> $GITHUB_OUTPUT
 
     outputs:
-      test_result: ${{ steps.save_output.outputs.test_result }}  # Store output
+      test_result: ${{ steps.output_step.outputs.test_result }}  # Store output
 
   collect-output:
     runs-on: ubuntu-latest
