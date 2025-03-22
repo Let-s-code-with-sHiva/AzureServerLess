@@ -27,7 +27,3 @@ jobs:
   collect-output:
     runs-on: ubuntu-latest
     needs: matrix-job  # Wait for the matrix job to finish
-
-    steps:
-      - name: Print Output
-        run: echo "Matrix Job Output: ${{ needs.matrix-job.outputs.test_result }}"
