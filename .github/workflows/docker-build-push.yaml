@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14, 16, 18] 
+        node-version: [14, 16, 18]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,10 +22,11 @@ jobs:
         run: echo "RESULT=Node.js ${{ matrix.node-version }} tested" >> $GITHUB_ENV
 
       - name: Save Output
-        run: echo "result=${RESULT}" >> $GITHUB_ENV
+        id: save_output
+        run: echo "::set-output name=test_result::Node.js ${{ matrix.node-version }} tested"
 
     outputs:
-      test_result: ${{ steps.output_step.outputs.RESULT }}  # Store output
+      test_result: ${{ steps.save_output.outputs.test_result }}  # Store output
 
   collect-output:
     runs-on: ubuntu-latest
